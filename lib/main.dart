@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: const WeatherHomePage(),
+      home: const LoginPage(),
     );
   }
 }
@@ -165,11 +166,11 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    fetchWeather(cityName);
-  }
+@override
+void initState() {
+  super.initState();
+  fetchWeather(cityName);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -181,6 +182,17 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
           'Weather App',
           style: TextStyle(color: Colors.white),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout,color: Colors.white),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+            },
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
